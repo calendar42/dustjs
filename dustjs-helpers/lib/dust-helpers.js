@@ -19,7 +19,8 @@ function filter(chunk, context, bodies, params, filter) {
   var params = params || {},
       actual, 
       expected;
-  if (params.key) {
+  // when @eq, @lt etc are used as standalone helpers, key is required and hence check for defined
+  if ( typeof params.key !== "undefined") {
     actual = helpers.tap(params.key, chunk, context);
   } else if (isSelect(context)) {
     actual = context.current().selectKey;
