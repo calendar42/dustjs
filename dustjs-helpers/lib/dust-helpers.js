@@ -28,8 +28,11 @@ function filter(chunk, context, bodies, params, filter) {
       filter = function() { return false; };
     }
   } else {
-    throw "No key specified for filter and no key found in context from select statement";
+      //throw "No key specified for filter and no key found in context from select statement";
+      //C42 : FS : 03-09-2014 : Who cares? Actual is simply undefined in this case ...
+      actual = undefined;
   }
+
   expected = helpers.tap(params.value, chunk, context);
   if (filter(expected, coerce(actual, params.type, context))) {
     if (isSelect(context)) {
